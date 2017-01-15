@@ -9,13 +9,4 @@ window.onload = function() {
             } catch (ignore) {}
         }
     });
-
-    // Sample code
-    var mainPage = document.querySelector('#main');
-
-    mainPage.addEventListener("click", function() {
-        var contentText = document.querySelector('#content-text');
-
-        contentText.innerHTML = (contentText.innerHTML === "Basic") ? "Tizen" : "Basic";
-    });
 };
