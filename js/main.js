@@ -21,8 +21,9 @@ window.onload = function() {
     $("body").click(function() {
     	if (!isGameStarted) {
     		newGame();
-    	} else if (((time % 1000 <= 10) && (time/1000 == score + 1))
-                || ((time % 1000 >= 990) && (time/1000 == score))) {
+    	} else if (((time % 1000 <= 15) && (Math.floor(time/1000) == score + 1))
+                || ((time % 1000 >= 985) && (Math.floor(time/1000) == score))) {
+    		score++;
             refreshScore();
 
         } else {
@@ -30,7 +31,7 @@ window.onload = function() {
         }
     });
     
-    oldColor = 195/360;
+    oldColor = Math.random();
 };
 
 function refreshTime() {
@@ -38,7 +39,7 @@ function refreshTime() {
 }
 
 function refreshScore() {
-	
+	console.log(score);
 }
 
 function newGame() {
@@ -52,15 +53,14 @@ function newGame() {
 		if (time % 1000 == 0) {
 			if (isGameStarted) {
 				setTimeout(function() {
-					var newRgbColor = HSVtoRGB(oldColor, 0.5, 0.8);
+					var newRgbColor = HSVtoRGB(oldColor, 0.5, 0.75);
 					$("body").css("background", "rgb(" + newRgbColor.r + "," + newRgbColor.g + "," + newRgbColor.b + ")");
 					oldColor += GOLDEN_RATIO;
 					if (oldColor > 1) oldColor -= 1;
-					newRgbColor = HSVtoRGB(oldColor, 0.5, 0.8);
+					newRgbColor = HSVtoRGB(oldColor, 0.5, 0.75);
 					$("#background").css("background", "rgb(" + newRgbColor.r + "," + newRgbColor.g + "," + newRgbColor.b + ")");
 				}, 0);
-				$("#background").css("width", "0%");
-				$("#background").animate({"width": "+=100%"}, 1000);
+				$("#background").stop().css("width", "0%").animate({"width": "+=100%"}, 1000);
 			}
 		}
 		time+=10;
