@@ -4,8 +4,8 @@ body {
     height: 100%;
     margin: 0 auto;
     padding: 0;
-    background-color: #222222;
     color: #ffffff;
+    background: #0099cc;
 }
 .page {
     width: 100%;
@@ -21,4 +21,12 @@ body {
 #content-text {
     font-weight: bold;
     font-size: 5em;
+}
+#background {
+	background: #0099cc;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 0%;
+	height: 100%;
 }
