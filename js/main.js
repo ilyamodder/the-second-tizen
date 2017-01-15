@@ -66,10 +66,10 @@ function putToHighscores(name) {
 	highscores.push(item);
 	highscores.sort(function(a, b) {
 		if (a.score > b.score) {
-			return 1;
+			return -1;
 		}
 		if (a.score < b.score) {
-			return -1;
+			return 1;
 		}
 		return 0;
 	});
