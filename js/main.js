@@ -3,7 +3,7 @@ var score;
 var oldColor;
 var time;
 var isGameStarted = false;
-
+var highscores;
 var timer;
 
 window.onload = function() {
@@ -32,6 +32,7 @@ window.onload = function() {
     });
     
     oldColor = Math.random();
+    getHighscores();
 };
 
 function refreshTime() {
@@ -40,6 +41,40 @@ function refreshTime() {
 
 function refreshScore() {
 	console.log(score);
+}
+
+function getHighscores() {
+	highscores = localStorage.getItem("highscores");
+	if (highscores) {
+		highscores = JSON.parse(highscores);
+	} else {
+		highscores = [];
+	}
+	
+}
+
+function isHighscore() {
+	return highscores.length == 0 || highscores[highscores.length-1].score < score;
+}
+
+function putToHighscores(name) {
+	var item = {
+			"name": name,
+			"score": score
+	};
+	
+	highscores.push(item);
+	highscores.sort(function(a, b) {
+		if (a.score > b.score) {
+			return 1;
+		}
+		if (a.score < b.score) {
+			return -1;
+		}
+		return 0;
+	});
+	highscores = highscores.slice(0, 4);
+	localStorage.setItem("highscores", JSON.stringify(highscores));
 }
 
 function newGame() {
@@ -73,6 +108,9 @@ function stopGame() {
 	isGameStarted = false;
 	$("#background").stop();
 	refreshTime();
+	if (isHighscore()) {
+		//todo show input of name
+	}
 }
 
 /* accepts parameters
