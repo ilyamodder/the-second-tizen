@@ -36,11 +36,17 @@ window.onload = function() {
 };
 
 function refreshTime() {
-	
+	var minutes = Math.floor(time / 60000);
+	var seconds = (Math.floor(time / 1000) % 60);
+	var millis = (Math.floor(time / 10) % 100);
+	if (minutes < 10) minutes = "0" + minutes;
+	if (seconds < 10) seconds = "0" + seconds;
+	if (millis < 10) millis = "0" + millis;
+	$("#timer").text(minutes + ":" + seconds + ":" + millis);
 }
 
 function refreshScore() {
-	console.log(score);
+	$("#score").text(score);
 }
 
 function getHighscores() {
@@ -82,6 +88,7 @@ function newGame() {
 	time = 0;
 	refreshTime();
 	refreshScore();
+	$("#tap-to-start").hide();
 	
 	timer = setInterval(function() {
 		refreshTime();
@@ -107,6 +114,7 @@ function stopGame() {
 	clearInterval(timer);
 	isGameStarted = false;
 	$("#background").stop();
+	$("#tap-to-start").show();
 	refreshTime();
 	if (isHighscore()) {
 		//todo show input of name
