@@ -91,7 +91,7 @@ function newGame() {
 	$("#tap-to-start").hide();
 	
 	timer = setInterval(function() {
-		refreshTime();
+		if (time % 3 == 0) refreshTime();
 		if (time % 1000 == 0) {
 			if (isGameStarted) {
 				setTimeout(function() {
