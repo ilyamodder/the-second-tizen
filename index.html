@@ -23,12 +23,12 @@
 			<h4>new record!</h4>
 			<p>enter your name</p>
 			<div class="input-field inline">
-            			<input id="name" type="text" class="validate">
-            			<label for="name" data-error="wrong" data-success="right">Name</label>
+            			<input id="name" type="text">
+            			<label for="name">Name</label>
           		</div>
 		</div>
 		<div class="modal-footer">
-			<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			<a href="#!" id="modal-ok" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
 		</div>
 	</div>
 	
@@ -46,7 +46,7 @@
 			<span id="tap-to-start" class="white-text">tap to start</span>
 		</div>
 		<div class="highscores" id="highscores">
-			<table>
+			<table id="table">
 				<tbody>
 					<tr>
 						<td>1</td>
@@ -60,7 +60,7 @@
 			<h3 id="tap-to-restart">tap to restart</h3>
 		</div>
 		<div class="footer">
-			<h3 id="highscore">highscore: </h3>
+			<h3 id="highscore">highscore: <span id="highscore-val"></span></h3>
 		</div>
     </div>
 	

@@ -18,6 +18,10 @@ window.onload = function() {
         }
     });
     
+    $("#modal-ok").click(function() {
+    	putToHighscores($("#name").val());
+    });
+    
     $("#main").click(function() {
     	if (!isGameStarted) {
     		newGame();
@@ -36,6 +40,11 @@ window.onload = function() {
     
     oldColor = Math.random();
     getHighscores();
+    if (highscores && highscores.length > 0) {
+    	$("#highscore-val").text(highscores[0].score);
+    } else {
+    	$("#highscore-val").text(0);
+    }
 };
 
 function refreshTime() {
@@ -52,6 +61,15 @@ function refreshScore() {
 	$("#score").text(score);
 }
 
+function refreshHighscores() {
+	$("#table").empty();
+	if (highscores) {
+		for (var i=0; i<highscores.length; i++) {
+			$("#table").append("<tr><td class='center'>" + (i + 1) + "</td><td>" + highscores[i].name + "</td><td class='center'>" + highscores[i].score + "</td></tr>");
+		}
+	}
+}
+
 function getHighscores() {
 	highscores = localStorage.getItem("highscores");
 	if (typeof highscores != "undefined") {
@@ -59,11 +77,11 @@ function getHighscores() {
 	} else {
 		highscores = [];
 	}
-	
+	refreshHighscores();
 }
 
 function isHighscore() {
-	return score > 0 && (highscores.length == 0 || highscores[highscores.length-1].score < score);
+	return score > 0 && (!highscores || highscores.length < 5 || highscores[highscores.length-1].score < score);
 }
 
 function putToHighscores(name) {
@@ -71,6 +89,10 @@ function putToHighscores(name) {
 			"name": name,
 			"score": score
 	};
+	
+	if (!highscores) {
+		highscores = [];
+	}
 	
 	highscores.push(item);
 	highscores.sort(function(a, b) {
@@ -82,8 +104,9 @@ function putToHighscores(name) {
 		}
 		return 0;
 	});
-	highscores = highscores.slice(0, 4);
+	highscores = highscores.slice(0, 5);
 	localStorage.setItem("highscores", JSON.stringify(highscores));
+	refreshHighscores();
 }
 
 function newGame() {
