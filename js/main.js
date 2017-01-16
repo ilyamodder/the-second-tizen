@@ -32,6 +32,7 @@ window.onload = function() {
     });
     $("#highscores").hide();
     $("#tap-to-restart").hide();
+    $('.modal').modal();
     
     oldColor = Math.random();
     getHighscores();
@@ -53,7 +54,7 @@ function refreshScore() {
 
 function getHighscores() {
 	highscores = localStorage.getItem("highscores");
-	if (highscores) {
+	if (typeof highscores != "undefined") {
 		highscores = JSON.parse(highscores);
 	} else {
 		highscores = [];
@@ -62,7 +63,7 @@ function getHighscores() {
 }
 
 function isHighscore() {
-	return highscores.length == 0 || highscores[highscores.length-1].score < score;
+	return score > 0 && (highscores.length == 0 || highscores[highscores.length-1].score < score);
 }
 
 function putToHighscores(name) {
@@ -130,7 +131,7 @@ function stopGame() {
 	$("#tap-to-restart").show();
 	refreshTime();
 	if (isHighscore()) {
-		//todo show input of name
+		$("#modal1").modal("open");
 	}
 }
 
