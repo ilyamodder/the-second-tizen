@@ -96,7 +96,6 @@ function newGame() {
 	$("#highscore").hide();
 	
 	timer = setInterval(function() {
-		if (time % 3 == 0) refreshTime();
 		if (time % 1000 == 0) {
 			if (isGameStarted) {
 				setTimeout(function() {
@@ -113,6 +112,14 @@ function newGame() {
 		time+=10;
 	}, 10);
 	isGameStarted = true;
+	requestAnimationFrame(onNewFrame);
+}
+
+function onNewFrame() {
+	refreshTime();
+	if (isGameStarted) {
+		requestAnimationFrame(onNewFrame);
+	}
 }
 
 function stopGame() {
