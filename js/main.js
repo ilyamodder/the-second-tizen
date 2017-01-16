@@ -30,6 +30,8 @@ window.onload = function() {
         	stopGame();
         }
     });
+    $("#highscores").hide();
+    $("#tap-to-restart").hide();
     
     oldColor = Math.random();
     getHighscores();
@@ -89,6 +91,9 @@ function newGame() {
 	refreshTime();
 	refreshScore();
 	$("#tap-to-start").hide();
+	$("#highscores").hide();
+	$("#tap-to-restart").hide();
+	$("#highscore").hide();
 	
 	timer = setInterval(function() {
 		if (time % 3 == 0) refreshTime();
@@ -114,7 +119,8 @@ function stopGame() {
 	clearInterval(timer);
 	isGameStarted = false;
 	$("#background").stop();
-	$("#tap-to-start").show();
+	$("#highscores").show();
+	$("#tap-to-restart").show();
 	refreshTime();
 	if (isHighscore()) {
 		//todo show input of name
