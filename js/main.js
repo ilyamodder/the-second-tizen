@@ -18,7 +18,7 @@ window.onload = function() {
         }
     });
     
-    $("body").click(function() {
+    $("#main").click(function() {
     	if (!isGameStarted) {
     		newGame();
     	} else if (((time % 1000 <= 15) && (Math.floor(time/1000) == score + 1))
